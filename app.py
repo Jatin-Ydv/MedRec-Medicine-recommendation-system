@@ -80,8 +80,9 @@ def predict():
         user_symptoms=[s.strip() for s in symptoms.split(',')]
         # remove extra characters, if any
         user_symptoms=[sym.strip("[]' ") for sym in user_symptoms]
-
-        predicted_disease=get_predicted_value(user_symptoms)
+        
+        pro_user_symptoms=[inp.lower().replace(' ', '_') for inp in user_symptoms]
+        predicted_disease=get_predicted_value(pro_user_symptoms)
 
         des,pre,med,die,wrkout=helper(predicted_disease)
         

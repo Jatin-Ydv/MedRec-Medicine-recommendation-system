@@ -114,6 +114,36 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+      .symptoms-container {
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Space inside the container */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-top: 20px; /* Space above the container */
+}
+
+.symptoms-title {
+  font-size: 1.3em; /* Larger title font */
+  font-weight: bold; /* Bold text for the title */
+  color: #004085; /* Dark blue color for the title */
+  margin-bottom: 10px; /* Space between title and list */
+}
+
+.symptoms-container ul {
+  list-style-type: none; /* Remove bullet points */
+  padding-left: 0; /* Remove left padding */
+}
+
+.symptoms-container li {
+  font-size: 1.2em; /* Slightly larger font size for items */
+  color: #495057; /* Dark grey color for list items */
+  background-color: #e2e6ea; /* Light blue-grey background for items */
+  border-radius: 5px; /* Rounded corners for list items */
+  padding: 8px 12px; /* Space inside each list item */
+  margin-bottom: 5px; /* Space between list items */
+  
+}
+
     </style>
   </head>
   <body>
@@ -136,25 +166,147 @@
         <div class="card-body">
           <form action="/predict" method="post">
             <div class="form-group mb-3">
-              <label for="symptoms">Enter your symptoms :</label>
-              <input type="text" class="form-control" name="symptoms" placeholder="Enter your symptoms here( Don't use spaces)">
+              <label for="symptoms" style="
+                font-weight: 700; 
+                color: #004085; 
+                font-size: 1.2em;
+                display: block;
+                margin-bottom: 10px;
+                text-transform: capitalize; 
+                letter-spacing: 0.6px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Enter your symptoms:</label>             
+              <input type="text" class="form-control" name="symptoms" placeholder="Enter your symptoms here..."  autocomplete="off">
             </div>
             <button class="btn btn-primary w-100">Get Recommendations</button>
           </form>
         </div>
       </div>
     </div>
-
+    
     {% if predicted_disease %}
     <div class="container mt-4">
-      <h2 class="text-center mb-4 sub-highlight-text">Our AI Doc Results</h2>
+      <div class="symptoms-container" style="margin-bottom: 30px;">
+        <div class="symptoms-title">Your Symptoms:</div>
+        <ul>
+          {% for i in user_symptoms %}
+          <li>{{ i }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div style="text-align: center; margin-top: 40px; margin-bottom: 1.5rem; background-color: #f0f8ff; border: 1px solid #d0e0ff; border-radius: 8px; padding: 20px;">
+        <h2 style="color: #003366; font-weight: bold; font-size: 1.3em; line-height: 1.3; margin: 0;">
+          Our AI Doc Results
+        </h2>
+      </div>                
       <div class="result-container">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#precautionsModal">Precautions</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#workoutModal">Workouts</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+        <button class="btn btn-primary" 
+        style="
+          background-color: #3cb371; 
+          color: #ffffff; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          font-size: 1em; 
+          cursor: pointer; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: background-color 0.3s, transform 0.2s;
+        " 
+        data-bs-toggle="modal" 
+        data-bs-target="#diseaseModal"
+        onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+        onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+  Disease
+</button>
+<button class="btn btn-primary" 
+        style="
+          background-color: #3cb371; 
+          color: #ffffff; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          font-size: 1em; 
+          cursor: pointer; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: background-color 0.3s, transform 0.2s;
+        " 
+        data-bs-toggle="modal" 
+        data-bs-target="#descriptionModal"
+        onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+        onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+    Description
+</button>
+<button class="btn btn-primary" 
+        style="
+          background-color: #3cb371; 
+          color: #ffffff; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          font-size: 1em; 
+          cursor: pointer; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: background-color 0.3s, transform 0.2s;
+        " 
+        data-bs-toggle="modal" 
+        data-bs-target="#precautionsModal"
+        onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+        onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+  Precautions
+</button>
+<button class="btn btn-primary" 
+style="
+  background-color: #3cb371; 
+  color: #ffffff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  font-size: 1em; 
+  cursor: pointer; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s, transform 0.2s;
+" 
+data-bs-toggle="modal" 
+data-bs-target="#medicationsModal"
+onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+Medications
+</button>
+<button class="btn btn-primary" 
+        style="
+          background-color: #3cb371; 
+          color: #ffffff; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          font-size: 1em; 
+          cursor: pointer; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: background-color 0.3s, transform 0.2s;
+        " 
+        data-bs-toggle="modal" 
+        data-bs-target="#workoutModal"
+        onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+        onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+  Workouts
+</button>
+<button class="btn btn-primary" 
+        style="
+          background-color: #3cb371; 
+          color: #ffffff; 
+          border: none; 
+          padding: 10px 20px; 
+          border-radius: 5px; 
+          font-size: 1em; 
+          cursor: pointer; 
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+          transition: background-color 0.3s, transform 0.2s;
+        " 
+        data-bs-toggle="modal" 
+        data-bs-target="#dietsModal"
+        onmouseover="this.style.backgroundColor='#2e8b57'; this.style.transform='scale(1.05)';" 
+        onmouseout="this.style.backgroundColor='#3cb371'; this.style.transform='scale(1)';">
+  Diet
+</button>
       </div>
     </div>
 
@@ -162,7 +314,7 @@
     <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #3cb371">
             <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -177,7 +329,7 @@
     <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #3cb371">
             <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -191,83 +343,86 @@
     <!--Precautions Modal-->
     <div class="modal fade" id="precautionsModal" tabindex="-1" aria-labelledby="precautionsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="precautionsModalLabel">Precautions</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content" style="border-radius: 10px; overflow: hidden; background-color: #ffffff; border: 1px solid #dee2e6;">
+          <div class="modal-header" style="background-color: #3cb371; color: #ffffff; border-bottom: 1px solid #dee2e6; padding: 15px 20px;">
+            <h5 class="modal-title" id="precautionsModalLabel" style="font-size: 1.25em; font-weight: bold; margin: 0;">Precautions</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent; border: none; color: #ffffff;"></button>
           </div>
-          <div class="modal-body">
-            <ul>
-              {% for i in dis_pre %}
-              <li>{{ i }}</li>
-              {% endfor %}
-            </ul>
+          <div class="modal-body" style="padding: 20px; color: #495057;">
+            {% for precaution in dis_pre %}
+            <div class="precaution-item" style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+              {{ precaution }}
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
-
+    
+    
     <!--Medications Modal-->
     <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content" style="border-radius: 10px; overflow: hidden; background-color: #ffffff; border: 1px solid #dee2e6;">
+          <div class="modal-header" style="background-color: #3cb371; color: #ffffff; border-bottom: 1px solid #dee2e6; padding: 15px 20px;">
+            <h5 class="modal-title" id="medicationsModalLabel" style="font-size: 1.25em; font-weight: bold; margin: 0;">Medications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent; border: none; color: #ffffff;"></button>
           </div>
-          <div class="modal-body">
-            <ul>
-              {% for i in dis_med %}
-              <li>{{ i }}</li>
-              {% endfor %}
-            </ul>
+          <div class="modal-body" style="padding: 20px; color: #495057;">
+            {% for medication in dis_med %}
+            <div class="medication-item" style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+              {{ medication }}
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
+    
 
     <!--Diets Modal-->
     <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content" style="border-radius: 10px; overflow: hidden; background-color: #ffffff; border: 1px solid #dee2e6;">
+          <div class="modal-header" style="background-color: #3cb371; color: #ffffff; border-bottom: 1px solid #dee2e6; padding: 15px 20px;">
+            <h5 class="modal-title" id="dietsModalLabel" style="font-size: 1.25em; font-weight: bold; margin: 0;">Diets</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent; border: none; color: #ffffff;"></button>
           </div>
-          <div class="modal-body">
-            <ul>
-              {% for i in dis_diet %}
-              <li>{{ i }}</li>
-              {% endfor %}
-            </ul>
+          <div class="modal-body" style="padding: 20px; color: #495057;">
+            {% for diet in dis_diet %}
+            <div class="diet-item" style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+              {{ diet }}
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
-
+    
     <!--Workout Modal-->
     <div class="modal fade" id="workoutModal" tabindex="-1" aria-labelledby="workoutModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="workoutModalLabel">Workouts</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content" style="border-radius: 10px; overflow: hidden; background-color: #ffffff; border: 1px solid #dee2e6;">
+          <div class="modal-header" style="background-color: #3cb371; color: #ffffff; border-bottom: 1px solid #dee2e6; padding: 15px 20px;">
+            <h5 class="modal-title" id="workoutModalLabel" style="font-size: 1.25em; font-weight: bold; margin: 0;">Workouts</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: transparent; border: none; color: #ffffff;"></button>
           </div>
-          <div class="modal-body">
-            <ul>
-              {% for i in dis_wrkout %}
-              <li>{{ i }}</li>
-              {% endfor %}
-            </ul>
+          <div class="modal-body" style="padding: 20px; color: #495057;">
+            {% for workout in dis_wrkout %}
+            <div class="workout-item" style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; margin-bottom: 10px;">
+              {{ workout }}
+            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
+    
     {% endif %}
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; 2024 Health Care Center. All rights reserved.</p>
+        <p>&copy; Developed by Jatin Yadav.</p>
       </div>
     </footer>
 

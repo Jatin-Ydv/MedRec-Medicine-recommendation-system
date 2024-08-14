@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 import sklearn
 from sklearn.preprocessing import LabelEncoder
-
+import ast
 
 le=LabelEncoder()
 
@@ -36,14 +36,13 @@ def helper(dis):
     pre=[col for col in pre.values]
     
     med=medications[medications['Disease']==dis]['Medication']
-    med=[med for med in med.values]
-    
+    medi=ast.literal_eval(med.values[0])
     die=diets[diets['Disease']==dis]['Diet']
-    die=[die for die in die.values]
+    die=ast.literal_eval(die.values[0])
     
     wrkout=workout[workout['disease']==dis]['workout']
     
-    return desc,pre,med,die,wrkout
+    return desc,pre,medi,die,wrkout
 
 
 # model predicted values
@@ -87,7 +86,7 @@ def predict():
         des,pre,med,die,wrkout=helper(predicted_disease)
         
         return render_template('index.html',predicted_disease=predicted_disease,dis_des=des,dis_pre=pre[0],
-                               dis_med=med,dis_wrkout=wrkout,dis_diet=die
+                               dis_med=med,dis_wrkout=wrkout,dis_diet=die,user_symptoms=user_symptoms
                                )
     
     

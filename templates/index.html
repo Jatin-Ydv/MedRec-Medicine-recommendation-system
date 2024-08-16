@@ -93,6 +93,15 @@
         padding: 15px;
         font-size: 16px;
       }
+      .alert {
+        background-color: #f8d7da; /* Light red background */
+        color: #721c24; /* Dark red text */
+        border: 1px solid #f5c6cb; /* Red border */
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
       .footer {
         background-color: #007bff;
         color: white;
@@ -107,6 +116,50 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+      .error-message {
+        color: #721c24;
+        background-color: #f8d7da;
+        padding: 5px 20px; /* Smaller padding to reduce box height */
+        margin-top: 20px;
+        margin-left: 115px; /* Center the error message horizontally */
+        margin-right: auto;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1120px; /* Smaller width for a more compact appearance */
+        white-space: nowrap; /* Ensures text stays on one line */
+    }
+    
+      .disclaimer {
+        background-color: #f0f4f8; /* Slightly lighter gray for a softer appearance */
+        border-left: 6px solid #007bff; /* Thicker blue border for more emphasis */
+        padding: 20px; /* Increased padding for more spacious content */
+        margin: 25px 0; /* Slightly larger margin for better separation */
+        font-family: 'Roboto', sans-serif; /* Modern, clean font */
+        color: #2c3e50; /* Darker shade of gray for a more striking contrast */
+        border-radius: 8px; /* Larger border-radius for a smoother, more modern look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* More pronounced shadow for depth */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    }
+
+    .disclaimer p {
+        margin: 0;
+        font-size: 0.96em; /* Slightly larger text for better readability */
+        line-height: 1.8; /* Increased line height for easier reading */
+        text-align: justify; /* Justified text for a more structured appearance */
+    }
+
+    .disclaimer strong {
+        color: #007bff; /* Highlight "Disclaimer" in the same blue as the border */
+        font-weight: bold;
+    }
+
+    .disclaimer:hover {
+        transform: translateY(-5px); /* Subtle lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    }
       .sub-highlight-text {
         font-size: 24px;
         font-weight: bold;
@@ -175,7 +228,7 @@
                 text-transform: capitalize; 
                 letter-spacing: 0.6px;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Enter your symptoms:</label>             
-              <input type="text" class="form-control" name="symptoms" placeholder="Enter your symptoms here..."  autocomplete="off">
+              <input type="text" class="form-control" name="symptoms" required placeholder="Enter your symptoms here..."  autocomplete="off">
             </div>
             <button class="btn btn-primary w-100">Get Recommendations</button>
           </form>
@@ -419,8 +472,15 @@ Medications
     </div>
     
     {% endif %}
-
+    {% if error_message %}
+    <div class="error-message" >
+        {{ error_message }}
+    </div>
+    {% endif %}
     <footer class="footer">
+      <div class="disclaimer">
+        <p><strong>Note from Developer:</strong> MedRec is trained on a specific set of diseases and may not respond if the symptoms are too generic or differ from the conditions it was trained on. For comprehensive diagnosis and treatment, please consult a qualified healthcare professional. MedRec is intended to be a supplementary tool and not a substitute for professional medical advice.</p>
+    </div>
       <div class="container">
         <p>&copy; Developed by Jatin Yadav.</p>
       </div>

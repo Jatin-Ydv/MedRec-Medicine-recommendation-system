@@ -88,7 +88,7 @@ def predict():
         predicted_disease=get_predicted_value(pro_user_symptoms)
         
         if predicted_disease is None:
-            error_message="Your symptoms are either too generic or outside the scope of MedRec!"
+            error_message="Your symptoms are outside the scope of MedRec!"
             des,pre,med,die,wrkout=None,None,None,None,None
             dis_pre=None
         else:
